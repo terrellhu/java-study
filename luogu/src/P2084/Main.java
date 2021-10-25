@@ -4,38 +4,24 @@ import java.util.Scanner;
 
 /**
  * @author hutao
+ * https://www.luogu.com.cn/problem/P2084
  */
 public class Main {
     public static void main(String[] args) {
         Scanner cin = new Scanner(System.in);
-        int n = cin.nextInt();
+        String m = cin.next();
+        String n = cin.next();
 
-        int[][] arr = new int[11][11];
-        int i = 1;
-        int x = 1, y = 0;
-
-
-        while (i <= n*n){
-            while (y < n && arr[x][y+1] == 0) {
-                arr[x][++y] = i++;
+        int i = n.length();
+        int j = 0;
+        StringBuilder ret = new StringBuilder();
+        for (; i > 0; i--) {
+            if (n.charAt(j) != '0') {
+                ret.append(String.valueOf(n.charAt(j))).append("*").append(m).append("^").append(String.valueOf(i - 1)).append("+");
             }
-            while (x < n && arr[x+1][y] == 0) {
-                arr[++x][y] = i++;
-            }
-            while (y > 1 && arr[x][y-1] == 0) {
-                arr[x][--y] = i++;
-            }
-            while (x > 1 && arr[x-1][y] == 0) {
-                arr[--x][y] = i++;
-            }
+            j++;
         }
-
-        for (int j = 1; j <= n; j++)
-        {
-            for (int k = 1; k <= n; k++) {
-                System.out.printf("%3d", arr[j][k]);
-            }
-            System.out.println();
-        }
+        String out = ret.substring(0, ret.length()-1);
+        System.out.println(out);
     }
 }
